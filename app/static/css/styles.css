@@ -1,0 +1,196 @@
+:root {
+    --bg-dark: #1a1a2e;
+    --bg-medium: #16213e;
+    --bg-light: #0f3460;
+    --primary-accent: #e94560;
+    --secondary-accent: #53a8b6;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --font-family: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, var(--bg-dark), var(--bg-medium));
+    color: var(--text-primary);
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.app-header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+.app-header h1 i {
+    color: var(--primary-accent);
+    margin-right: 10px;
+}
+.app-header p {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    margin-top: 5px;
+}
+
+/* Form Styling */
+.add-link-form-section {
+    background-color: var(--bg-light);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.add-link-form .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.add-link-form input, .add-link-form select, .add-link-form textarea {
+    width: 100%;
+    background-color: var(--bg-medium);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-family: var(--font-family);
+    font-size: 1em;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+.add-link-form input::placeholder, .add-link-form textarea::placeholder {
+    color: var(--text-secondary);
+}
+.add-link-form input:focus, .add-link-form select:focus, .add-link-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-accent);
+    box-shadow: 0 0 0 3px rgba(83, 168, 182, 0.3);
+}
+.add-link-form button {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary-accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.add-link-form button:hover {
+    background: #c73b52;
+}
+
+/* Filter Buttons */
+.filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.filter-btn {
+    padding: 8px 18px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.filter-btn:hover {
+    background: var(--secondary-accent);
+    color: white;
+    border-color: var(--secondary-accent);
+}
+.filter-btn.active {
+    background: var(--primary-accent);
+    color: white;
+    border-color: var(--primary-accent);
+}
+
+/* Link Card Styling */
+.link-card {
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+.link-icon {
+    font-size: 2em;
+    color: var(--secondary-accent);
+}
+.link-card[data-link-type="youtube-video"] .link-icon { color: #FF0000; }
+.link-card[data-link-type="github-repo"] .link-icon { color: #c9d1d9; }
+.link-card[data-link-type="pdf-document"] .link-icon { color: #FFD700; }
+.link-card[data-link-type="social-media"] .link-icon { color: #1DA1F2; }
+
+.link-details {
+    flex-grow: 1;
+}
+.link-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+.link-title:hover {
+    text-decoration: underline;
+    color: var(--primary-accent);
+}
+.link-url {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    margin: 4px 0;
+    word-break: break-all;
+}
+.link-description {
+    font-size: 0.95em;
+    color: var(--text-primary);
+    margin-top: 8px;
+}
+.delete-btn {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.delete-btn:hover {
+    color: var(--primary-accent);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 50px;
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    color: var(--text-secondary);
+}
+.empty-state i {
+    font-size: 3em;
+    margin-bottom: 15px;
+}

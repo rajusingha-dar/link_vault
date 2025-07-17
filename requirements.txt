@@ -1,0 +1,19 @@
+# FastAPI and Server
+fastapi
+uvicorn[standard]
+
+# Database ORM and Driver
+sqlalchemy
+mysql-connector-python
+
+# Templating Engine for HTML
+jinja2
+
+# Data Validation (a core part of FastAPI)
+pydantic
+
+# For loading environment variables from .env file
+python-dotenv
+
+# Required by FastAPI for HTML form handling
+python-multipart

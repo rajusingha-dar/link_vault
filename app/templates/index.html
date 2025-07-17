@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkVault | Save Your Links</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header class="app-header">
+            <h1><i class="fa-solid fa-link"></i> LinkVault</h1>
+            <p>Your Personal Digital Scrapbook</p>
+        </header>
+
+        <section class="add-link-form-section">
+            <form action="/add" method="post" class="add-link-form">
+                <div class="form-row">
+                    <input type="text" name="title" placeholder="Link Title" required autocomplete="off">
+                    <select name="link_type" required>
+                        <option value="" disabled selected>Select Link Type</option>
+                        {% for type in link_types %}
+                        {# Use the enum's simple value for the form, but display a formatted version #}
+                        <option value="{{ type.value }}">{{ type.value.replace('_', ' ').title() }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-row">
+                    <input type="url" name="url" placeholder="https://example.com" required autocomplete="off">
+                </div>
+                <div class="form-row">
+                    <textarea name="description" placeholder="Add a short description... (optional)" rows="2"></textarea>
+                </div>
+                <button type="submit">Save Link</button>
+            </form>
+        </section>
+
+        <section class="filter-section">
+            <a href="/" class="filter-btn {% if active_filter == 'All' %}active{% endif %}">All</a>
+            {% for type in link_types %}
+            {# Use the enum's simple value for the filter link #}
+            <a href="/?filter_by={{ type.value }}" class="filter-btn {% if active_filter == type.value %}active{% endif %}">{{ type.value.replace('_', ' ').title() }}</a>
+            {% endfor %}
+        </section>
+
+        <section class="link-list-section">
+            {% for link in links %}
+            <div class="link-card" data-link-type="{{ link.link_type.value }}">
+                <div class="link-icon">
+                    {% if link.link_type.value == 'youtube' %}<i class="fa-brands fa-youtube"></i>
+                    {% elif link.link_type.value == 'github' %}<i class="fa-brands fa-github"></i>
+                    {% elif link.link_type.value == 'pdf' %}<i class="fa-solid fa-file-pdf"></i>
+                    {% elif link.link_type.value == 'social_media' %}<i class="fa-solid fa-hashtag"></i>
+                    {% else %}<i class="fa-solid fa-globe"></i>
+                    {% endif %}
+                </div>
+                <div class="link-details">
+                    <a href="{{ link.url }}" target="_blank" class="link-title">{{ link.title }}</a>
+                    <p class="link-url">{{ link.url }}</p>
+                    {% if link.description %}
+                    <p class="link-description">{{ link.description }}</p>
+                    {% endif %}
+                </div>
+                <a href="/delete/{{ link.id }}" class="delete-btn" aria-label="Delete link">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <i class="fa-solid fa-box-open"></i>
+                <p>No links found. Add one to get started!</p>
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
+</body>
+</html>
